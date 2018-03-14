@@ -1,0 +1,28 @@
+{
+  "name": "eyevinn-adxchange-engine",
+  "version": "0.1.0",
+  "description": "Ad Exchange Engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "$(npm bin)/jasmine",
+    "postversion": "git push && git push --tags",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eyevinn/adxchange-engine.git"
+  },
+  "author": "Eyevinn Technology <info@eyevinn.se>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Eyevinn/adxchange-engine/issues"
+  },
+  "homepage": "https://github.com/Eyevinn/adxchange-engine#readme",
+  "devDependencies": {
+    "jasmine": "^3.1.0"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "restify": "^6.3.4"
+  }
+}
