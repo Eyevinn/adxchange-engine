@@ -2,9 +2,9 @@ The Eyevinn Adxchange Engine is a microservice placed between the server-side ad
 
 It currently provides the following API:
 
-Resource | Method | Response | Description
--------- | ------ | -------- | -----------
-/mockup | GET | VAST XML | Returns a mockup VAST XML that can be used for testing
+Resource | Method | Response | Module | Description
+-------- | ------ | -------- | ------ | -----------
+/mockup | GET | VAST XML | MockupExchange | Returns a mockup VAST XML that can be used for testing
 
 
 ## Node Module
