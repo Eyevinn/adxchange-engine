@@ -89,12 +89,10 @@ class MockupExchange {
   }
 
   handleRequest(req, res, next) {
-    res.set('content-type', 'application/xml');
+    res.set('Content-Type', 'application/xml');
     debug(`Handle request`);
     this.generateMockupResponse().then(payload => {
-      const vast = new VAST({version: "4.0"});
-      selectAd(vast, mockParams)
-      res.send(vast.xml({ pretty : true, indent : '  ', newline : '\n' }));
+      res.send(payload);
       next();
     }).catch(err => {
       next(this._errorHandler(err));
@@ -104,7 +102,9 @@ class MockupExchange {
   generateMockupResponse() {
     return new Promise((resolve, reject) => {
       debug(`Generate mockup response`);
-      resolve('mockup response');
+      const vast = new VAST({version: "4.0"});
+      selectAd(vast, mockParams)
+      resolve(vast.xml({ pretty : true, indent : '  ', newline : '\n' }));
     });
   }
 
