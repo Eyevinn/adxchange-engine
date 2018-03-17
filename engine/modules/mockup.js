@@ -4,14 +4,11 @@ const xml = require("xml");
 const VAST = require('vast-xml');
 
 const selectAd = (vast, params) => {
-  if(params.profile === "1"){
-    createAd(vast, preroll, params)
-    createAd(vast, volvo, params)
-    createAd(vast, postroll, params)
-  }else if(params.profile === "2"){
-    createAd(vast, preroll, params)
-    createAd(vast, umeaenergi, params)
-    createAd(vast, postroll, params)
+  if (params.profile === "1") {
+    createAd(vast, apotea, params)
+  } else if(params.profile === "2") {
+    createAd(vast, grannyra, params)
+    createAd(vast, sff, params)
   }
 }
 
@@ -49,39 +46,31 @@ const createAd = (vast, adObject, params) => {
   });
 }
 
-const preroll = {
-  id: "preroll-video",
-  title: "preroll",
-  duration: "00:00:10",
-  url: 'http://cdn.lab.eyevinn.technology/ads/TV4-PreRoll-Reklam.mp4',
-  impression: false,
-}
-
-const volvo = {
-  id: "video-volvo-impression",
-  title: "VolvoS90LuxurySedanSongoftheOpenRoad-30s",
-  duration: "00:00:30",
-  url: "http://cdn.lab.eyevinn.technology/ads/VolvoS90LuxurySedanSongoftheOpenRoad-30s.mp4",
+const apotea = {
+  id: "video-apotea-impression",
+  title: "Apotea-15s",
+  duration: "00:00:15",
+  url: "https://testcontent.eyevinn.technology/ads/apotea-15s.mp4",
   impression: true,
 }
 
-const umeaenergi = {
-  id: "video-UmeaEnergi-impression",
-  title: "video-ad-UmeaEnergi",
-  duration: "00:00:30",
-  url: "http://cdn.lab.eyevinn.technology/ads/UmeaEnergi-Bredband-30s.mp4",
+const grannyra = {
+  id: "video-grannyra-impression",
+  title: "Grannyra-10s",
+  duration: "00:00:10",
+  url: "https://testcontent.eyevinn.technology/ads/grannyra-10s.mp4",
   impression: true,
 }
 
-const postroll = {
-  id: "video-post",
-  title: "video-postroll",
-  url: "http://cdn.lab.eyevinn.technology/ads/TV4-PostRoll-Reklam.mp4",
-  duration: "00:00:10",
-  impression: false,
+const sff = {
+  id: "video-sff-impression",
+  title: "SvenskFF-15s",
+  duration: "00:00:15",
+  url: "https://testcontent.eyevinn.technology/ads/sff-15s.mp4",
+  impression: true,
 }
 
-const mockParams = {profile: ["1", "2"][Math.floor(Math.random())]}
+const PROFILES = [ "1", "2" ];
 
 class MockupExchange {
   constructor() {
@@ -103,6 +92,9 @@ class MockupExchange {
     return new Promise((resolve, reject) => {
       debug(`Generate mockup response`);
       const vast = new VAST({version: "4.0"});
+      const mockParams = {
+        profile: PROFILES[Math.floor(Math.random() * PROFILES.length)],
+      }
       selectAd(vast, mockParams)
       resolve(vast.xml({ pretty : true, indent : '  ', newline : '\n' }));
     });
