@@ -17,6 +17,7 @@ const createAd = (vast, adObject, params) => {
     id: adObject.id,
     structure: 'inline',
     AdTitle: adObject.title,
+    Description: 'Dummy ad',
     AdSystem: {
       name: 'mock',
       version: '1.0'
@@ -29,7 +30,8 @@ const createAd = (vast, adObject, params) => {
   });
   if(adObject.impression){
     ad.attachImpression({
-      url: params.trackingUrl + '/track?AdId='+ adObject.id +'&Profile=' + params.profile + '&Channel=' + params.channel
+      id: 'mock-server',
+      url: params.trackingUrl + '/tracking?AdId='+ adObject.id +'&Profile=' + params.profile,
     })
   }
   creative.attachMediaFile(adObject.url, {
@@ -44,6 +46,7 @@ const createAd = (vast, adObject, params) => {
     maintainAspectRatio: "true",
     codec: ""
   });
+  creative.attachVideoClick('ClickThrough', 'https://tv.eyevinn.technology', Math.floor(Math.random() * 100));
 }
 
 const apotea = {
@@ -94,6 +97,7 @@ class MockupExchange {
       const vast = new VAST({version: "4.0"});
       const mockParams = {
         profile: PROFILES[Math.floor(Math.random() * PROFILES.length)],
+        trackingUrl: 'https://adxchange.api.eyevinn.technology/mockup',
       }
       selectAd(vast, mockParams)
       resolve(vast.xml({ pretty : true, indent : '  ', newline : '\n' }));
