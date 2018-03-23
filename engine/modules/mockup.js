@@ -94,7 +94,7 @@ class MockupExchange {
   generateMockupResponse() {
     return new Promise((resolve, reject) => {
       debug(`Generate mockup response`);
-      const vast = new VAST({version: "4.0"});
+      const vast = new VAST();
       const mockParams = {
         profile: PROFILES[Math.floor(Math.random() * PROFILES.length)],
         trackingUrl: 'https://adxchange.api.eyevinn.technology/mockup',
